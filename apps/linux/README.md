@@ -31,8 +31,8 @@ To build and install a Conda package instead, install rattler-build from conda-f
 ```bash
 conda create -n manimble-build -c conda-forge rattler-build
 conda activate manimble-build
-rattler-build build --recipe apps/linux/conda/recipe.yaml -c conda-forge
-conda create -n manimble-linux -c ./output -c conda-forge manimble-linux
+rattler-build build --recipe apps/linux/conda/recipe.yaml -c conda-forge --channel-priority disabled
+conda create -n manimble-linux -c apps/linux/conda/output -c conda-forge --no-channel-priority manimble-linux
 ```
 
 The recipe builds Manimble from this checkout and bundles the pinned Manim Slides Python package, which is not
