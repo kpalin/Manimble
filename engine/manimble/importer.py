@@ -28,7 +28,8 @@ PT_PER_FONT_SIZE = 0.945                  # same calibration as the exporter
 # for measuring text here and registered for rendering by the deck (FONT_REGISTER_SOURCE).
 OFFICE_FONT_DIRS = tuple(sorted(glob.glob("/Applications/Microsoft *.app/Contents/Resources/DFonts")))
 _FONT_DIRS = ("/System/Library/Fonts", "/System/Library/Fonts/Supplemental", "/Library/Fonts",
-              str(Path.home() / "Library" / "Fonts")) + OFFICE_FONT_DIRS
+              str(Path.home() / "Library" / "Fonts"), "/usr/share/fonts", "/usr/local/share/fonts",
+              str(Path.home() / ".local" / "share" / "fonts"), str(Path.home() / ".fonts")) + OFFICE_FONT_DIRS
 
 # written into an imported deck's common.py when it has a table
 TABLE_GRID_SOURCE = '''

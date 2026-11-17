@@ -13,8 +13,8 @@ everything Manimble does, from a first deck to presenting, with a chapter on
 
 ## Installation
 
-Manimble runs on macOS 13 or later, on both Apple Silicon and Intel Macs (the app is a universal binary). Windows and
-Linux versions are planned.
+Manimble runs on macOS 13 or later, on both Apple Silicon and Intel Macs (the app is a universal binary), and has a
+Linux desktop frontend for X11. A Windows version is planned.
 
 ### Precompiled binary
 
@@ -58,6 +58,12 @@ Python chooser is needed after `install_manimble.sh` completes; with none found 
 
 `~/Applications/Manimble.app` carries the engine and uses the installed Python environment. Rerun
 `install_manimble.sh` after pulling changes.
+
+### Linux (X11)
+
+The GTK 4 frontend is pip-installable and has a Conda environment definition for GTK and native dependencies. It uses
+the shared Python engine and supports opening/creating decks, editing source, rendering and navigating slides, basic
+presentation, and PowerPoint export. See [`apps/linux/README.md`](apps/linux/README.md) for system dependencies and install commands.
 
 ### Decks
 

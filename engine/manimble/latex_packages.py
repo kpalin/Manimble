@@ -1,12 +1,11 @@
-"""LaTeX packages a Beamer deck needs: which are missing on this Mac, and installing them with tlmgr once the user
-has agreed (never on its own). A system-wide TeX (MacTeX, BasicTeX) asks for an administrator password through
-macOS, as install_dependencies.sh does; TinyTeX in the user's Library takes packages without one."""
+"""Find missing Beamer LaTeX packages and install them only after the user agrees."""
 from __future__ import annotations
 
 import os
 import re
 import shlex
 import subprocess
+import sys
 from pathlib import Path
 
 from .beamer_import import find_tool, strip_comments
@@ -104,10 +103,14 @@ def install(files: list[str], progress=None) -> dict:
     try:
         if root and os.access(os.path.join(root, "tlpkg"), os.W_OK):
             r = subprocess.run(["/bin/sh", "-c", cmd], capture_output=True, text=True, timeout=1800)
-        else:
+        elif sys.platform == "darwin":
             # a system TeX lives in a folder only an administrator can change: macOS asks for the password
             script = 'do shell script "' + cmd.replace("\\", "\\\\").replace('"', '\\"') + '" with administrator privileges'
             r = subprocess.run(["osascript", "-e", script], capture_output=True, text=True, timeout=1800)
+        else:
+            return {"ok": False, "error": "The TeX Live package tree is not writable. Install the missing packages "
+                                          "with your TeX distribution's package manager or configure a user-writable "
+                                          "TeX tree, then try again."}
     except (subprocess.TimeoutExpired, OSError) as exc:
         return {"ok": False, "error": f"tlmgr did not finish ({exc})"}
     still = absent(files)

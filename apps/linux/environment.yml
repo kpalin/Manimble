@@ -1,0 +1,14 @@
+name: manimble-linux
+channels:
+  - conda-forge
+dependencies:
+  - python >=3.11,<3.14
+  - gtk4
+  - pygobject >=3.46
+  - cairo
+  - pango
+  - manimpango >=0.6.1,<1
+  - pycairo
+  - ffmpeg
+  - poppler
+  - pip
