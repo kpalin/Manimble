@@ -26,6 +26,19 @@ conda activate manimble-linux
 python -m pip install .
 ```
 
+To build and install a Conda package instead, install rattler-build from conda-forge and use the Linux recipe:
+
+```bash
+conda create -n manimble-build -c conda-forge rattler-build
+conda activate manimble-build
+rattler-build build --recipe apps/linux/conda/recipe.yaml -c conda-forge
+conda create -n manimble-linux -c ./output -c conda-forge manimble-linux
+```
+
+The recipe builds Manimble from this checkout and bundles the pinned Manim Slides Python package, which is not
+published on conda-forge. Its other runtime dependencies, including GTK, Manim, and rendering libraries, are
+resolved as Conda packages.
+
 Launch the editor with:
 
 ```bash
